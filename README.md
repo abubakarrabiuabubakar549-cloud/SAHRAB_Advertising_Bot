@@ -39,3 +39,17 @@ app.add_handler(CallbackQueryHandler(payment, "^payment$"))async def payment(upd
         "Account Number: XXXXXXXXXX\n\n"
         "Bayan ka biya, turo screenshot."
     )[InlineKeyboardButton("💳 BIYA TALLA", callback_data="payment")]
+async def payment(update, context):
+    q = update.callback_query
+    await q.answer()
+    await q.edit_message_text(
+        "💳 *BIYAN TALLA*\n\n"
+        "Bank: Moniepoint MFB\n"
+        "Account Name: Abubakar Rabiu Abubakar\n"
+        "Account Number: 6674767017\n\n"
+        "Bayan ka biya, danna *Na Biya* ka turo screenshot.",
+        parse_mode="Markdown",
+        reply_markup=InlineKeyboardMarkup([
+            [InlineKeyboardButton("✅ NA BIYA", callback_data="paid")]
+        ])
+    )app.add_handler(CallbackQueryHandler(payment, "^payment$"))
