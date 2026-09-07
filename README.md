@@ -167,3 +167,5 @@ async def reject(update, context):
     conn.close()
 
     await q.edit_message_text(f"❌ Talla #{ad_id} an ƙi.")
+app.add_handler(CallbackQueryHandler(approve, r"^approve_\d+$"))
+app.add_handler(CallbackQueryHandler(reject, r"^reject_\d+$"))
