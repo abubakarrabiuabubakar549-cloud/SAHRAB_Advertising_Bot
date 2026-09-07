@@ -29,3 +29,13 @@ await q.edit_message_text(
     "Za a aika mini kai tsaye domin approval.",
     parse_mode="Markdown"
 )await q.edit_message_text("📢 *SAKA TALLA*\n\nMataki 1/4: Rubuta *sunan kasuwancinka*.", parse_mode="Markdown")
+app.add_handler(CallbackQueryHandler(payment, "^payment$"))async def payment(update, context):
+    q = update.callback_query
+    await q.answer()
+    await q.edit_message_text(
+        "💳 BIYAN TALLA\n\n"
+        "Bank: Moniepoint MFB\n"
+        "Account Name: SAHRAB\n"
+        "Account Number: XXXXXXXXXX\n\n"
+        "Bayan ka biya, turo screenshot."
+    )[InlineKeyboardButton("💳 BIYA TALLA", callback_data="payment")]
