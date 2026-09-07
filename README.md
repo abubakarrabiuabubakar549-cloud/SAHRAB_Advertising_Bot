@@ -205,3 +205,11 @@ InlineKeyboardButton("📞 CONTACT ADMIN", url="https://t.me/Excerllency")elif q
             [InlineKeyboardButton("⬅️ BAYA", callback_data="home")]
         ])
     )
+elif q.data == "contact":
+    await q.edit_message_text(
+        "📞 Danna maɓallin da ke ƙasa domin yin magana da Admin.",
+        reply_markup=InlineKeyboardMarkup([
+            [InlineKeyboardButton("💬 BUƊE ADMIN", url="https://t.me/Excerllency")],
+            [InlineKeyboardButton("⬅️ BAYA", callback_data="home")]
+        ])
+    )InlineKeyboardButton("📞 CONTACT ADMIN", url="https://t.me/Excerllency")
