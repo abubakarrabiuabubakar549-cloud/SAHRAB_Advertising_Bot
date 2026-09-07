@@ -197,3 +197,11 @@ def main():
 if __name__ == "__main__":
     main()
     
+InlineKeyboardButton("📞 CONTACT ADMIN", url="https://t.me/Excerllency")elif q.data == "contact":
+    await q.edit_message_text(
+        "📞 Danna maɓallin da ke ƙasa domin yin magana da Admin.",
+        reply_markup=InlineKeyboardMarkup([
+            [InlineKeyboardButton("💬 BUƊE ADMIN", url="https://t.me/Excerllency")],
+            [InlineKeyboardButton("⬅️ BAYA", callback_data="home")]
+        ])
+    )
