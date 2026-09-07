@@ -127,3 +127,43 @@ app.add_handler(CommandHandler("admin", admin))async def admin(update, context):
                 ]
             ])
         )
+async def approve(update, context):
+    q = update.callback_query
+    await q.answer()
+
+    ad_id = int(q.data.split("_")[1])
+
+    conn = db()
+    row = conn.execute(
+        "SELECT business, ad_text, media_file_id, media_type FROM ads WHERE id=?",
+        (ad_id,)
+    ).fetchone()
+
+    conn.execute("UPDATE ads SET status='approved' WHERE id=?", (ad_id,))
+    conn.commit()
+    conn.close()
+
+    caption = f"📢 {row[0]}\n\n{row[1]}"
+
+    if row[3] == "photo" and row[2]:
+        await context.bot.send_photo(CHANNEL_ID, row[2], caption=caption)
+    elif row[3] == "video" and row[2]:
+        await context.bot.send_video(CHANNEL_ID, row[2], caption=caption)
+    else:
+        await context.bot.send_message(CHANNEL_ID, caption)
+
+    await q.edit_message_text(f"✅ Talla #{ad_id} an wallafa.")
+
+
+async def reject(update, context):
+    q = update.callback_query
+    await q.answer()
+
+    ad_id = int(q.data.split("_")[1])
+
+    conn = db()
+    conn.execute("UPDATE ads SET status='rejected' WHERE id=?", (ad_id,))
+    conn.commit()
+    conn.close()
+
+    await q.edit_message_text(f"❌ Talla #{ad_id} an ƙi.")
