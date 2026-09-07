@@ -1,4 +1,4 @@
-💰 FARASHIN TALLA – SAHRAB Advertising Bot
+CHANNEL_ID = "@SAHRAB_Ads"CHANNEL_ID = os.getenv("CHANNEL_ID", "").strip()💰 FARASHIN TALLA – SAHRAB Advertising Bot
 
 - ₦500 – 24 Hours
 - ₦1,200 – 3 Days
