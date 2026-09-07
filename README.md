@@ -103,3 +103,27 @@ async def approve_post(context, caption, file_id=None):
     caption=f"📢 {business}\n\n{ad_text}",
     file_id=media_file_id
 )
+app.add_handler(CommandHandler("admin", admin))async def admin(update, context):
+    if update.effective_user.id != ADMIN_ID:
+        return
+
+    conn = db()
+    ads = conn.execute(
+        "SELECT id,business,package,status FROM ads ORDER BY id DESC LIMIT 10"
+    ).fetchall()
+    conn.close()
+
+    if not ads:
+        await update.message.reply_text("Babu sabuwar oda.")
+        return
+
+    for ad in ads:
+        await update.message.reply_text(
+            f"#{ad[0]} | {ad[1]}\nPackage: {ad[2]}\nStatus: {ad[3]}",
+            reply_markup=InlineKeyboardMarkup([
+                [
+                    InlineKeyboardButton("✅ Approve", callback_data=f"approve_{ad[0]}"),
+                    InlineKeyboardButton("❌ Reject", callback_data=f"reject_{ad[0]}")
+                ]
+            ])
+        )
