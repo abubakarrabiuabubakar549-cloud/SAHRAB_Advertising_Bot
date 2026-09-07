@@ -94,3 +94,12 @@ async def payment_proof(update, context):
         await update.message.reply_text(
             "An karɓa. Admin zai duba sannan ya wallafa tallarka."
         )update.message.photoapp.add_handler(MessageHandler(filters.PHOTO, payment_proof))user.idfilters.PHOTO
+async def approve_post(context, caption, file_id=None):
+    if file_id:
+        await context.bot.send_photo(CHANNEL_ID, file_id, caption=caption)
+    else:
+        await context.bot.send_message(CHANNEL_ID, caption)await approve_post(
+    context,
+    caption=f"📢 {business}\n\n{ad_text}",
+    file_id=media_file_id
+)
