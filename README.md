@@ -169,3 +169,8 @@ async def reject(update, context):
     await q.edit_message_text(f"❌ Talla #{ad_id} an ƙi.")
 app.add_handler(CallbackQueryHandler(approve, r"^approve_\d+$"))
 app.add_handler(CallbackQueryHandler(reject, r"^reject_\d+$"))
+app.add_handler(CallbackQueryHandler(payment, "^payment$"))
+app.add_handler(CallbackQueryHandler(paid, "^paid$"))
+app.add_handler(CommandHandler("admin", admin))
+app.add_handler(CallbackQueryHandler(approve, r"^approve_\d+$"))
+app.add_handler(CallbackQueryHandler(reject, r"^reject_\d+$"))[InlineKeyboardButton("💳 BIYA TALLA", callback_data="payment")],
