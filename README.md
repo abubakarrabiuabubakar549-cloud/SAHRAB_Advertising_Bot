@@ -20,3 +20,12 @@ async def start(update, context):
         "👋 Barka da zuwa SAHRAB Advertising Bot.\n\nZaɓi irin tallar da kake so:",
         reply_markup=InlineKeyboardMarkup(keyboard)
     )
+await q.edit_message_text(
+    "📢 *SAKA TALLA*\n\n"
+    "1. Rubuta sunan kasuwancinka.\n"
+    "2. Rubuta bayanin tallarka.\n"
+    "3. Turo hoto ko bidiyo.\n"
+    "4. Zaɓi package.\n\n"
+    "Za a aika mini kai tsaye domin approval.",
+    parse_mode="Markdown"
+)await q.edit_message_text("📢 *SAKA TALLA*\n\nMataki 1/4: Rubuta *sunan kasuwancinka*.", parse_mode="Markdown")
