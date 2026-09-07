@@ -74,3 +74,23 @@ async def payment(update, context):
     )
 
 app.add_handler(CallbackQueryHandler(paid, "^paid$"))app.add_handler(CallbackQueryHandler(payment, "^payment$"))
+async def payment_proof(update, context):
+    user = update.effective_user
+
+    if update.message.photo:
+        file_id = update.message.photo[-1].file_id
+
+        await context.bot.send_photo(
+            chat_id=ADMIN_ID,
+            photo=file_id,
+            caption=(
+                f"💰 Sabuwar Shaidar Biyan Kuɗi\n\n"
+                f"👤 {user.full_name}\n"
+                f"@{user.username or 'babu username'}\n"
+                f"ID: {user.id}"
+            )
+        )
+
+        await update.message.reply_text(
+            "An karɓa. Admin zai duba sannan ya wallafa tallarka."
+        )update.message.photoapp.add_handler(MessageHandler(filters.PHOTO, payment_proof))user.idfilters.PHOTO
