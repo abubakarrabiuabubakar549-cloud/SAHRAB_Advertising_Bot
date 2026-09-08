@@ -169,3 +169,183 @@ app.add_handler(CommandHandler("contact", contact))
 app.add_handler(CommandHandler("channel", channel))
 app.add_handler(CommandHandler("admin", admin))
 app.add_handler(CallbackQueryHandler(buttons))
+
+import os
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import (
+    Application,
+    CommandHandler,
+    CallbackQueryHandler,
+    ContextTypes,
+)
+
+TOKEN = os.getenv("BOT_TOKEN")
+ADMIN_ID = int(os.getenv("ADMIN_ID", "0"))
+
+if not TOKEN:
+    raise RuntimeError("BOT_TOKEN is missing")
+
+
+def menu():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton("📢 SAKA TALLA", callback_data="ads")],
+        [
+            InlineKeyboardButton("💰 FARASHI", callback_data="price"),
+            InlineKeyboardButton("💳 PAY NOW", callback_data="pay")
+        ],
+        [
+            InlineKeyboardButton("📞 CONTACT ADMIN", callback_data="contact")
+        ],
+        [
+            InlineKeyboardButton("📺 SHIGA CHANNEL", callback_data="channel")
+        ]
+    ])
+
+
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    text = (
+        "📢 *SAHRAB Advertising Bot*\n\n"
+        "Muna taimakawa wajen tallata kasuwanci, kaya da Telegram channels.\n\n"
+        "Zaɓi abin da kake so."
+    )
+
+    await update.message.reply_text(
+        text,
+        parse_mode="Markdown",
+        reply_markup=menu()
+    )
+
+
+async def price(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(
+        "💰 *FARASHIN TALLA*\n\n"
+        "⭐ Basic — ₦100\n"
+        "⭐ Standard — ₦500\n"
+        "⭐ Premium — ₦1,000",
+        parse_mode="Markdown"
+    )
+
+
+async def pay(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(
+        "💳 *BIYAN TALLA*\n\n"
+        "Bank: Moniepoint MFB\n"
+        "Account Name: Abubakar Rabiu Abubakar\n"
+        "Account Number: 6674767017\n\n"
+        "Bayan ka biya ka turo screenshot.",
+        parse_mode="Markdown"
+    )
+
+
+async def contact(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(
+        "📞 Danna ƙasa domin yin magana da Admin.",
+        reply_markup=InlineKeyboardMarkup([
+            [InlineKeyboardButton("💬 BUƊE ADMIN", url="https://t.me/Excerllency")]
+        ])
+    )
+
+
+async def channel(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(
+        "📺 Danna ƙasa domin shiga channel.",
+        reply_markup=InlineKeyboardMarkup([
+            [InlineKeyboardButton("🚀 SAHRAB ADS", url="https://t.me/SAHRAB_Ads")]
+        ])
+    )
+
+
+async def admin(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if update.effective_user.id != ADMIN_ID:
+        return
+
+    await update.message.reply_text("👨‍💼 Admin Panel yana aiki.")
+
+
+async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    q = update.callback_query
+    await q.answer()
+
+    if q.data == "ads":
+        await q.edit_message_text(
+            "📢 *SAKA TALLA*\n\n"
+            "Turo:\n"
+            "• Sunan kasuwanci\n"
+            "• Rubutun talla\n"
+            "• Hoto ko Bidiyo\n"
+            "• Bayan ka biya turo screenshot.",
+            parse_mode="Markdown",
+            reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton("⬅️ BAYA", callback_data="home")]
+            ])
+        )
+
+    elif q.data == "price":
+        await q.edit_message_text(
+            "💰 *FARASHIN TALLA*\n\n"
+            "⭐ Basic — ₦100\n"
+            "⭐ Standard — ₦500\n"
+            "⭐ Premium — ₦1,000",
+            parse_mode="Markdown",
+            reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton("⬅️ BAYA", callback_data="home")]
+            ])
+        )
+
+    elif q.data == "pay":
+        await q.edit_message_text(
+            "💳 *BIYAN TALLA*\n\n"
+            "Bank: Moniepoint MFB\n"
+            "Account Name: Abubakar Rabiu Abubakar\n"
+            "Account Number: 6674767017",
+            parse_mode="Markdown",
+            reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton("⬅️ BAYA", callback_data="home")]
+            ])
+        )
+
+    elif q.data == "contact":
+        await q.edit_message_text(
+            "📞 Yi magana da Admin.",
+            reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton("💬 BUƊE ADMIN", url="https://t.me/Excerllency")],
+                [InlineKeyboardButton("⬅️ BAYA", callback_data="home")]
+            ])
+        )
+
+    elif q.data == "channel":
+        await q.edit_message_text(
+            "📺 Shiga Channel.",
+            reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton("🚀 SAHRAB ADS", url="https://t.me/SAHRAB_Ads")],
+                [InlineKeyboardButton("⬅️ BAYA", callback_data="home")]
+            ])
+        )
+
+    elif q.data == "home":
+        await q.edit_message_text(
+            "🏠 *SAHRAB Advertising Bot*",
+            parse_mode="Markdown",
+            reply_markup=menu()
+        )
+
+
+def main():
+    app = Application.builder().token(TOKEN).build()
+
+    app.add_handler(CommandHandler("start", start))
+    app.add_handler(CommandHandler("price", price))
+    app.add_handler(CommandHandler("pay", pay))
+    app.add_handler(CommandHandler("contact", contact))
+    app.add_handler(CommandHandler("channel", channel))
+    app.add_handler(CommandHandler("admin", admin))
+    app.add_handler(CallbackQueryHandler(buttons))
+
+    print("SAHRAB Advertising Bot V10 is running...")
+    app.run_polling()
+
+
+if __name__ == "__main__":
+    main()
+    
+python-telegram-bot==22.2
