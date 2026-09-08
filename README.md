@@ -129,64 +129,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 def main():
-    app = Application.builder().token(BOT_TOKEN).build()
-
-    app.add_handler(CommandHandler("start", start))
-    app.add_handler(CommandHandler("admin", admin))
-    app.add_handler(CallbackQueryHandler(buttons))
-
-    print("SAHRAB Advertising Bot is running...")
-    app.run_polling()
-
-
-if __name__ == "__main__":
-    main()
-async def price(update, context):
-    await update.message.reply_text(
-        "💰 FARASHIN TALLA\n\n"
-        "⭐ Basic – ₦100\n"
-        "⭐ Standard – ₦500\n"
-        "⭐ Premium – ₦1000"
-    )
-
-async def contact(update, context):
-    await update.message.reply_text(
-        "📞 Yi magana da Admin:",
-        reply_markup=InlineKeyboardMarkup([[
-            InlineKeyboardButton("💬 BUƊE ADMIN", url="https://t.me/Excerllency")
-        ]])
-    )
-
-async def channel(update, context):
-    await update.message.reply_text(
-        "📺 Shiga Channel:",
-        reply_markup=InlineKeyboardMarkup([[
-            InlineKeyboardButton("🚀 SAHRAB ADS", url="https://t.me/SAHRAB_Ads")
-        ]])
-    )app.add_handler(CommandHandler("start", start))
-app.add_handler(CommandHandler("price", price))
-app.add_handler(CommandHandler("contact", contact))
-app.add_handler(CommandHandler("channel", channel))
-app.add_handler(CommandHandler("admin", admin))
-app.add_handler(CallbackQueryHandler(buttons))
-
-import os
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import (
-    Application,
-    CommandHandler,
-    CallbackQueryHandler,
-    ContextTypes,
-)
-
-TOKEN = os.getenv("BOT_TOKEN")
-ADMIN_ID = int(os.getenv("ADMIN_ID", "0"))
-
-if not TOKEN:
-    raise RuntimeError("BOT_TOKEN is missing")
-
-
-def menu():
+    app = def menu():
     return InlineKeyboardMarkup([
         [InlineKeyboardButton("📢 SAKA TALLA", callback_data="ads")],
         [
@@ -341,11 +284,4 @@ def main():
     app.add_handler(CommandHandler("admin", admin))
     app.add_handler(CallbackQueryHandler(buttons))
 
-    print("SAHRAB Advertising Bot V10 is running...")
-    app.run_polling()
-
-
-if __name__ == "__main__":
-    main()
-    
-python-telegram-bot==22.2
+    print("SAHRAB Advertisil
