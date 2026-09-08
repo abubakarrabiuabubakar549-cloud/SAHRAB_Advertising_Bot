@@ -141,3 +141,31 @@ def main():
 
 if __name__ == "__main__":
     main()
+async def price(update, context):
+    await update.message.reply_text(
+        "💰 FARASHIN TALLA\n\n"
+        "⭐ Basic – ₦100\n"
+        "⭐ Standard – ₦500\n"
+        "⭐ Premium – ₦1000"
+    )
+
+async def contact(update, context):
+    await update.message.reply_text(
+        "📞 Yi magana da Admin:",
+        reply_markup=InlineKeyboardMarkup([[
+            InlineKeyboardButton("💬 BUƊE ADMIN", url="https://t.me/Excerllency")
+        ]])
+    )
+
+async def channel(update, context):
+    await update.message.reply_text(
+        "📺 Shiga Channel:",
+        reply_markup=InlineKeyboardMarkup([[
+            InlineKeyboardButton("🚀 SAHRAB ADS", url="https://t.me/SAHRAB_Ads")
+        ]])
+    )app.add_handler(CommandHandler("start", start))
+app.add_handler(CommandHandler("price", price))
+app.add_handler(CommandHandler("contact", contact))
+app.add_handler(CommandHandler("channel", channel))
+app.add_handler(CommandHandler("admin", admin))
+app.add_handler(CallbackQueryHandler(buttons))
