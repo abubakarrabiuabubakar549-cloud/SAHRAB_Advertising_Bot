@@ -1,4 +1,29 @@
-import os
+app.add_handler(CommandHandler("price", price))
+app.add_handler(CommandHandler("contact", contact))
+app.add_handler(CommandHandler("channel", channel))async def price(update, context):
+    await update.message.reply_text(
+        "💰 FARASHI\n\n"
+        "₦500 - 24 Hours\n"
+        "₦1,200 - 3 Days\n"
+        "₦2,500 - 7 Days\n"
+        "₦5,000 - Pinned Post"
+    )
+
+async def contact(update, context):
+    await update.message.reply_text(
+        "📞 Yi magana da Admin:",
+        reply_markup=InlineKeyboardMarkup([[
+            InlineKeyboardButton("💬 BUƊE ADMIN", url="https://t.me/Excerllency")
+        ]])
+    )
+
+async def channel(update, context):
+    await update.message.reply_text(
+        "📺 Shiga channel:",
+        reply_markup=InlineKeyboardMarkup([[
+            InlineKeyboardButton("🚀 SAHRAB ADS", url="https://t.me/SAHRAB_Ads")
+        ]])
+    )import os
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (
     Application,
