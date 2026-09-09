@@ -285,3 +285,5 @@ def main():
     app.add_handler(CallbackQueryHandler(buttons))
 
     print("SAHRAB Advertisil
+if update.effective_user.id not in ADMIN_IDS:
+    returnupdate.effective_user.idADMIN_ID = int(os.getenv("ADMIN_ID", "0"))ADMIN_IDS = list(map(int, os.getenv("ADMIN_IDS", "").split(",")))
