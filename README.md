@@ -66,8 +66,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def admin(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if update.effective_user.id != ADMIN_ID:
-        return
+if update.effective_user.id not in ADMIN_IDS:
+    return
 
     await update.message.reply_text(
         "👨‍💼 *ADMIN PANEL*\n\n"
